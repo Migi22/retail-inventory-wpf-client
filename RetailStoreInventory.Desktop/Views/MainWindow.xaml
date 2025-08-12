@@ -10,13 +10,39 @@
         WindowStartupLocation="CenterScreen"
         WindowStyle="SingleBorderWindow"
         Background="White">
+    <Window.Resources>
+        <!-- Style for bottom navigation-like buttons -->
+        <Style x:Key="NavButtonStyle" TargetType="Button">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="Margin" Value="0,5"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="bg" 
+                                Background="{TemplateBinding Background}" 
+                                CornerRadius="5"
+                                Padding="0,15">
+                            <ContentPresenter VerticalAlignment="Center" Margin="50,0,0,0"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <!-- Hover -->
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="bg" Property="Background" Value="#5E936C"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
     <Grid>
         <!-- Base Grid -->
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="228"/>
-            <!-- Side panel -->
             <ColumnDefinition Width="*"/>
-            <!-- Main content -->
         </Grid.ColumnDefinitions>
 
         <!-- Window Border -->
@@ -25,8 +51,8 @@
 
         <!-- Side Panel -->
         <DockPanel Grid.Column="0"
-           Background="#3E5F44"
-           LastChildFill="True">
+                   Background="#3E5F44"
+                   LastChildFill="True">
 
             <!-- Top: Logo and System Name -->
             <StackPanel DockPanel.Dock="Top"
@@ -34,13 +60,13 @@
                         VerticalAlignment="Center"
                         HorizontalAlignment="Center"
                         Margin="0,0,0,10">
-                
+
                 <!-- Logo -->
                 <Image Source="/Assets/Images/logo_retail_system.png"
                        Width="90"
                        Height="90"
                        Margin="0,0,10,0"/>
-                
+
                 <!-- Text block group -->
                 <StackPanel Orientation="Vertical"
                             VerticalAlignment="Center">
@@ -58,33 +84,36 @@
                                FontSize="10"
                                FontWeight="Light"
                                VerticalAlignment="Center"/>
-
                 </StackPanel>
             </StackPanel>
-            
-            <!-- Divider Line -->
+
+            <!-- Divider Line Top -->
             <Separator DockPanel.Dock="Top"
                        Margin="10,0"
                        Background="White"
                        Height="1"
                        Opacity="0.5"/>
 
-
             <!-- Bottom: Settings and Sign Out buttons -->
             <StackPanel DockPanel.Dock="Bottom"
                         Margin="10">
+                <!-- Divider Line Bottom -->
+                <Separator DockPanel.Dock="Bottom"
+                           Margin="10,0"
+                           Background="White"
+                           Height="1"
+                           Opacity="0.5"/>
                 <Button Content="Settings"
-                        Margin="0,0,0,10"
-                        Padding="10" />
+                        Style="{StaticResource NavButtonStyle}"/>
                 <Button Content="Sign Out"
-                        Padding="10" />
+                        Style="{StaticResource NavButtonStyle}"/>
             </StackPanel>
 
             <!-- Middle: Navigation buttons -->
             <StackPanel Margin="10">
-
                 <StackPanel.Resources>
-                    <Style TargetType="RadioButton">
+                    <!-- Style for navigation radio buttons -->
+                    <Style x:Key="NavRadioButtonStyle" TargetType="RadioButton">
                         <Setter Property="Foreground" Value="White"/>
                         <Setter Property="Background" Value="Transparent"/>
                         <Setter Property="BorderThickness" Value="0"/>
@@ -118,39 +147,33 @@
                                         <Trigger Property="IsMouseOver" Value="True">
                                             <Setter TargetName="bg" Property="Background" Value="#5E936C"/>
                                         </Trigger>
-
                                         <!-- Selected -->
                                         <Trigger Property="IsChecked" Value="True">
                                             <Setter TargetName="bg" Property="Background" Value="#5E936C"/>
                                             <Setter TargetName="indicator" Property="Visibility" Value="Visible"/>
-
                                         </Trigger>
                                     </ControlTemplate.Triggers>
                                 </ControlTemplate>
-                                
-                                
                             </Setter.Value>
                         </Setter>
-                    </Style>    
+                    </Style>
                 </StackPanel.Resources>
 
                 <!-- Buttons -->
-                <RadioButton  Content="Dashboard" IsChecked="True" GroupName="MenuGroup"/>
-                <RadioButton  Content="Products" GroupName="MenuGroup"/>
-                <RadioButton  Content="Reports" GroupName="MenuGroup"/>
-                <!-- Todo: be added buttons in next updates -->
+                <RadioButton Content="Dashboard" IsChecked="True" GroupName="MenuGroup" Style="{StaticResource NavRadioButtonStyle}"/>
+                <RadioButton Content="Products" GroupName="MenuGroup" Style="{StaticResource NavRadioButtonStyle}"/>
+                <RadioButton Content="Reports" GroupName="MenuGroup" Style="{StaticResource NavRadioButtonStyle}"/>
             </StackPanel>
-
         </DockPanel>
 
-
         <!-- Main Content Panel -->
-        <Grid Grid.Column="1" Background="White" HorizontalAlignment="Stretch" Height="NaN" VerticalAlignment="Stretch" Width="NaN">
+        <Grid Grid.Column="1" Background="White">
             <DataGrid x:Name="ProductsDataGrid"
                       IsReadOnly="True"
                       AutoGenerateColumns="False"
                       HeadersVisibility="Column"
-                      ItemsSource="{Binding Products}" Margin="182,28,34,167">
+                      ItemsSource="{Binding Products}"
+                      Margin="182,28,34,167">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="*" />
                     <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="2*" />
