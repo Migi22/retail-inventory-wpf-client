@@ -3,26 +3,161 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:RetailStoreInventory.Desktop.Views"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Retail Store Inventory"
+        Height="600"
+        Width="850"
+        AllowsTransparency="False"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="SingleBorderWindow"
+        Background="White">
     <Grid>
-        <DataGrid x:Name="ProductsDataGrid"
-                  HorizontalAlignment="Left"
-                  Height="134"
-                  Margin="228,83,0,0"
-                  VerticalAlignment="Top"
-                  Width="502"
-                  IsReadOnly="True"
-                  AutoGenerateColumns="False"
-                  HeadersVisibility="Column"
-                  ItemsSource="{Binding Products}">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="*" />
-                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="2*" />
-                <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity}" Width="*" />
-                <DataGridTextColumn Header="Price" Binding="{Binding Price, StringFormat=₱{0:N2}}" Width="*" />
-            </DataGrid.Columns>
-        </DataGrid>
+        <!-- Base Grid -->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="228"/>
+            <!-- Side panel -->
+            <ColumnDefinition Width="*"/>
+            <!-- Main content -->
+        </Grid.ColumnDefinitions>
+
+        <!-- Window Border -->
+        <Border Background="#3E5F44"
+                CornerRadius="20" />
+
+        <!-- Side Panel -->
+        <DockPanel Grid.Column="0"
+           Background="#3E5F44"
+           LastChildFill="True">
+
+            <!-- Top: Logo and System Name -->
+            <StackPanel DockPanel.Dock="Top"
+                        Orientation="Horizontal"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                        Margin="0,0,0,10">
+                
+                <!-- Logo -->
+                <Image Source="/Assets/Images/logo_retail_system.png"
+                       Width="90"
+                       Height="90"
+                       Margin="0,0,10,0"/>
+                
+                <!-- Text block group -->
+                <StackPanel Orientation="Vertical"
+                            VerticalAlignment="Center">
+
+                    <!-- Top Text -->
+                    <TextBlock Text="Tap Retail"
+                               Foreground="White"
+                               FontSize="15"
+                               FontWeight="Bold"
+                               VerticalAlignment="Center"/>
+
+                    <!-- Bottom Text-->
+                    <TextBlock Text="Retail Management System"
+                               Foreground="White"
+                               FontSize="10"
+                               FontWeight="Light"
+                               VerticalAlignment="Center"/>
+
+                </StackPanel>
+            </StackPanel>
+            
+            <!-- Divider Line -->
+            <Separator DockPanel.Dock="Top"
+                       Margin="10,0"
+                       Background="White"
+                       Height="1"
+                       Opacity="0.5"/>
+
+
+            <!-- Bottom: Settings and Sign Out buttons -->
+            <StackPanel DockPanel.Dock="Bottom"
+                        Margin="10">
+                <Button Content="Settings"
+                        Margin="0,0,0,10"
+                        Padding="10" />
+                <Button Content="Sign Out"
+                        Padding="10" />
+            </StackPanel>
+
+            <!-- Middle: Navigation buttons -->
+            <StackPanel Margin="10">
+
+                <StackPanel.Resources>
+                    <Style TargetType="RadioButton">
+                        <Setter Property="Foreground" Value="White"/>
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="BorderThickness" Value="0"/>
+                        <Setter Property="Padding" Value="10"/>
+                        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                        <Setter Property="Margin" Value="0,3"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="RadioButton">
+                                    <Grid>
+                                        <!-- Main Background -->
+                                        <Border x:Name="bg" 
+                                                Background="{TemplateBinding Background}" 
+                                                CornerRadius="5"
+                                                Padding="14,20"/>
+
+                                        <!-- Button text -->
+                                        <ContentPresenter VerticalAlignment="Center" Margin="50,0,0,0"/>
+
+                                        <!-- Green dot indicator -->
+                                        <Ellipse x:Name="indicator"
+                                                 Width="8" Height="8"
+                                                 Fill="Green"
+                                                 HorizontalAlignment="Right"
+                                                 VerticalAlignment="Center"
+                                                 Margin="0,0,5,0"
+                                                 Visibility="Collapsed"/>
+                                    </Grid>
+                                    <ControlTemplate.Triggers>
+                                        <!-- Hover -->
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter TargetName="bg" Property="Background" Value="#5E936C"/>
+                                        </Trigger>
+
+                                        <!-- Selected -->
+                                        <Trigger Property="IsChecked" Value="True">
+                                            <Setter TargetName="bg" Property="Background" Value="#5E936C"/>
+                                            <Setter TargetName="indicator" Property="Visibility" Value="Visible"/>
+
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                                
+                                
+                            </Setter.Value>
+                        </Setter>
+                    </Style>    
+                </StackPanel.Resources>
+
+                <!-- Buttons -->
+                <RadioButton  Content="Dashboard" IsChecked="True" GroupName="MenuGroup"/>
+                <RadioButton  Content="Products" GroupName="MenuGroup"/>
+                <RadioButton  Content="Reports" GroupName="MenuGroup"/>
+                <!-- Todo: be added buttons in next updates -->
+            </StackPanel>
+
+        </DockPanel>
+
+
+        <!-- Main Content Panel -->
+        <Grid Grid.Column="1" Background="White" HorizontalAlignment="Stretch" Height="NaN" VerticalAlignment="Stretch" Width="NaN">
+            <DataGrid x:Name="ProductsDataGrid"
+                      IsReadOnly="True"
+                      AutoGenerateColumns="False"
+                      HeadersVisibility="Column"
+                      ItemsSource="{Binding Products}" Margin="182,28,34,167">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="*" />
+                    <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="2*" />
+                    <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity}" Width="*" />
+                    <DataGridTextColumn Header="Price" Binding="{Binding Price, StringFormat=₱{0:N2}}" Width="*" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
     </Grid>
 </Window>
