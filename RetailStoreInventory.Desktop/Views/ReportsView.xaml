@@ -1,0 +1,130 @@
+<!-- 
+    ReportsView.xaml - UserControl for generating and exporting various reports
+    
+    This view provides functionality for:
+    - Generating inventory reports
+    - Generating sales reports  
+    - Exporting reports to different formats (Excel, PDF)
+    - Printing reports
+    
+    Currently shows the UI structure but buttons don't have functionality.
+    In a real application, these would be bound to commands in a ReportsViewModel.
+-->
+
+<UserControl x:Class="RetailStoreInventory.Desktop.Views.ReportsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- Main layout container -->
+    <Grid>
+        <!-- Content stack with top margin -->
+        <StackPanel Margin="20">
+            <!-- Page title -->
+            <TextBlock Text="Reports" 
+                       FontSize="24" 
+                       FontWeight="Bold" 
+                       HorizontalAlignment="Center" 
+                       Margin="0,0,0,20"/>
+            
+            <!-- Reports content grid -->
+            <Grid>
+                <!-- Define two equal-width columns for report types -->
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>  <!-- Left column -->
+                    <ColumnDefinition Width="*"/>  <!-- Right column -->
+                </Grid.ColumnDefinitions>
+                
+                <!-- Define two rows: report types and export options -->
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>  <!-- Top row for report types -->
+                    <RowDefinition Height="Auto"/>  <!-- Bottom row for export options -->
+                </Grid.RowDefinitions>
+
+                <!-- Inventory Report Card -->
+                <Border Grid.Column="0" Grid.Row="0" 
+                        Background="#F3E5F5" 
+                        CornerRadius="10" 
+                        Margin="10" 
+                        Padding="20">
+                    <StackPanel>
+                        <TextBlock Text="Inventory Report" 
+                                   FontSize="18" 
+                                   FontWeight="SemiBold" 
+                                   Margin="0,0,0,15"/>
+                        <TextBlock Text="Generate inventory status report" 
+                                   FontSize="14" 
+                                   Margin="0,0,0,10"/>
+                        
+                        <!-- Generate button - would be bound to command in real app -->
+                        <Button Content="Generate Report" 
+                                Background="#9C27B0" 
+                                Foreground="White" 
+                                Padding="10,5" 
+                                HorizontalAlignment="Left"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- Sales Report Card -->
+                <Border Grid.Column="1" Grid.Row="0" 
+                        Background="#E0F2F1" 
+                        CornerRadius="10" 
+                        Margin="10" 
+                        Padding="20">
+                    <StackPanel>
+                        <TextBlock Text="Sales Report" 
+                                   FontSize="18" 
+                                   FontWeight="SemiBold" 
+                                   Margin="0,0,0,15"/>
+                        <TextBlock Text="Generate sales analysis report" 
+                                   FontSize="14" 
+                                   Margin="0,0,0,10"/>
+                        
+                        <!-- Generate button - would be bound to command in real app -->
+                        <Button Content="Generate Report" 
+                                Background="#009688" 
+                                Foreground="White" 
+                                Padding="10,5" 
+                                HorizontalAlignment="Left"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- Export Options Section - spans both columns -->
+                <Border Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" 
+                        Background="#FFF8E1" 
+                        CornerRadius="10" 
+                        Margin="10" 
+                        Padding="20">
+                    <StackPanel>
+                        <TextBlock Text="Export Options" 
+                                   FontSize="18" 
+                                   FontWeight="SemiBold" 
+                                   Margin="0,0,0,15"/>
+                        
+                        <!-- Horizontal stack of export buttons -->
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <!-- Excel export button -->
+                            <Button Content="Export to Excel" 
+                                    Background="#FF9800" 
+                                    Foreground="White" 
+                                    Padding="15,8" 
+                                    Margin="0,0,10,0"/>
+                            
+                            <!-- PDF export button -->
+                            <Button Content="Export to PDF" 
+                                    Background="#F44336" 
+                                    Foreground="White" 
+                                    Padding="15,8" 
+                                    Margin="0,0,10,0"/>
+                            
+                            <!-- Print button -->
+                            <Button Content="Print Report" 
+                                    Background="#607D8B" 
+                                    Foreground="White" 
+                                    Padding="15,8"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </StackPanel>
+    </Grid>
+</UserControl>
