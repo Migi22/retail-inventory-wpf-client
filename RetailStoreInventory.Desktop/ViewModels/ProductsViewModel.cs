@@ -29,19 +29,19 @@ namespace RetailStoreInventory.Desktop.ViewModels
         /// This enables real-time updates in the DataGrid.
         /// </summary>
         public ObservableCollection<Product> Products { get; set; }
-        
+
         /// <summary>
         /// Command for adding new products to the collection.
         /// Bound to the "Add Product" button in the UI.
         /// </summary>
         public ICommand AddProductCommand { get; }
-        
+
         /// <summary>
         /// Command for editing existing products.
         /// Bound to the "Edit" button in each DataGrid row.
         /// </summary>
         public ICommand EditProductCommand { get; }
-        
+
         /// <summary>
         /// Command for deleting products from the collection.
         /// Bound to the "Delete" button in each DataGrid row.
@@ -81,14 +81,14 @@ namespace RetailStoreInventory.Desktop.ViewModels
         private void AddProduct(object? parameter)
         {
             // Create a new product with auto-generated ID and default values
-            var newProduct = new Product 
-            { 
+            var newProduct = new Product
+            {
                 Id = _nextId++, // Generate unique ID and increment for next use
                 Name = $"New Product {_nextId - 1}", // Give it a temporary name
                 Quantity = 0, // Start with zero quantity
                 Price = 0.00m // Start with zero price
             };
-            
+
             // Add the new product to the collection (UI automatically updates)
             Products.Add(newProduct);
         }
@@ -106,7 +106,7 @@ namespace RetailStoreInventory.Desktop.ViewModels
             {
                 // Show a simple message for now
                 MessageBox.Show($"Editing product: {product.Name}", "Edit Product");
-                
+
                 // TODO: In a real application, you would:
                 // 1. Open an edit dialog/window
                 // 2. Allow user to modify product properties
@@ -127,11 +127,11 @@ namespace RetailStoreInventory.Desktop.ViewModels
             {
                 // Show confirmation dialog to prevent accidental deletions
                 var result = MessageBox.Show(
-                    $"Are you sure you want to delete {product.Name}?", 
-                    "Confirm Delete", 
-                    MessageBoxButton.YesNo, 
+                    $"Are you sure you want to delete {product.Name}?",
+                    "Confirm Delete",
+                    MessageBoxButton.YesNo,
                     MessageBoxImage.Question);
-                
+
                 // Only delete if user confirms
                 if (result == MessageBoxResult.Yes)
                 {

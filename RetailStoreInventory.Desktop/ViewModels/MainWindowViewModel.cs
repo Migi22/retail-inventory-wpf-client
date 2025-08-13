@@ -20,7 +20,7 @@ namespace RetailStoreInventory.Desktop.ViewModels
         /// This is what gets shown in the main content area of the window.
         /// </summary>
         private UserControl _currentView = null!;
-        
+
         /// <summary>
         /// Gets or sets the currently displayed view.
         /// When this changes, the UI automatically updates to show the new view.
@@ -51,7 +51,7 @@ namespace RetailStoreInventory.Desktop.ViewModels
         {
             // Create the navigation command that will handle view switching
             NavigateCommand = new RelayCommand(NavigateTo);
-            
+
             // Set the default view to Products when the application starts
             CurrentView = new Views.DashboardView();
         }

@@ -16,7 +16,7 @@ namespace RetailStoreInventory.Desktop.ViewModels
         /// The action to execute when the command is invoked (e.g., button click)
         /// </summary>
         private readonly Action<object?> _execute;
-        
+
         /// <summary>
         /// Optional predicate that determines if the command can execute (e.g., button enabled/disabled)
         /// </summary>

@@ -41,10 +41,10 @@ namespace RetailStoreInventory.Desktop.ViewModels
         {
             // Check if the value is actually different to avoid unnecessary UI updates
             if (EqualityComparer<T>.Default.Equals(field, value)) return false;
-            
+
             // Set the new value
             field = value;
-            
+
             // Notify the UI that this property changed
             OnPropertyChanged(propertyName);
             return true;
