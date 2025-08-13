@@ -8,12 +8,7 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Compile Remove="Views\MainWindow.xaml\**" />
-    <EmbeddedResource Remove="Views\MainWindow.xaml\**" />
-    <None Remove="Views\MainWindow.xaml\**" />
-    <Page Remove="Views\MainWindow.xaml\**" />
-  </ItemGroup>
+
 
   <ItemGroup>
     <None Remove="Assets\Images\logo_retail_system.png" />

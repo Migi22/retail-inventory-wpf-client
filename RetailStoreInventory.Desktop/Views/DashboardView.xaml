@@ -1,0 +1,105 @@
+<!-- 
+    DashboardView.xaml - UserControl for the main dashboard/overview page
+    
+    This view displays key metrics and information about the retail store:
+    - Total number of products in inventory
+    - Total value of all inventory
+    - Recent activity log
+    
+    The dashboard provides a quick overview for store managers and staff.
+    Currently shows static data, but plan to make it dynamic when I implement the database.
+-->
+
+<UserControl x:Class="RetailStoreInventory.Desktop.Views.DashboardView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- Main layout container -->
+    <Grid>
+        <!-- Center-aligned content stack -->
+        <StackPanel Margin="20" VerticalAlignment="Center">
+            <!-- Dashboard title -->
+            <TextBlock Text="Dashboard" 
+                       FontSize="24" 
+                       FontWeight="Bold" 
+                       HorizontalAlignment="Center" 
+                       Margin="0,0,0,20"/>
+            
+            <!-- Dashboard content grid with metrics cards -->
+            <Grid>
+                <!-- Define two equal-width columns -->
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>  <!-- Left column -->
+                    <ColumnDefinition Width="*"/>  <!-- Right column -->
+                </Grid.ColumnDefinitions>
+                
+                <!-- Define two rows: metrics cards and activity log -->
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>  <!-- Top row for metrics -->
+                    <RowDefinition Height="Auto"/>  <!-- Bottom row for activity -->
+                </Grid.RowDefinitions>
+
+                <!-- Total Products Card - shows count of all products -->
+                <Border Grid.Column="0" Grid.Row="0" 
+                        Background="#E3F2FD" 
+                        CornerRadius="10" 
+                        Margin="10" 
+                        Padding="20">
+                    <StackPanel>
+                        <TextBlock Text="Total Products" 
+                                   FontSize="16" 
+                                   FontWeight="SemiBold" 
+                                   Margin="0,0,0,10"/>
+                        <TextBlock Text="2" 
+                                   FontSize="32" 
+                                   FontWeight="Bold" 
+                                   Foreground="#1976D2"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- Total Value Card - shows monetary value of all inventory -->
+                <Border Grid.Column="1" Grid.Row="0" 
+                        Background="#E8F5E8" 
+                        CornerRadius="10" 
+                        Margin="10" 
+                        Padding="20">
+                    <StackPanel>
+                        <TextBlock Text="Total Value" 
+                                   FontSize="16" 
+                                   FontWeight="SemiBold" 
+                                   Margin="0,0,0,10"/>
+                        <TextBlock Text="$21.00" 
+                                   FontSize="32" 
+                                   FontWeight="Bold" 
+                                   Foreground="#388E3C"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- Recent Activity Log - spans both columns -->
+                <Border Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" 
+                        Background="#FFF3E0" 
+                        CornerRadius="10" 
+                        Margin="10" 
+                        Padding="20">
+                    <StackPanel>
+                        <TextBlock Text="Recent Activity" 
+                                   FontSize="18" 
+                                   FontWeight="SemiBold" 
+                                   Margin="0,0,0,15"/>
+                        
+                        <!-- Activity log entries - in a real app these would be dynamic -->
+                        <TextBlock Text="• Coke 237ml quantity updated to 10" 
+                                   FontSize="14" 
+                                   Margin="0,0,0,5"/>
+                        <TextBlock Text="• Hansel added to inventory" 
+                                   FontSize="14" 
+                                   Margin="0,0,0,5"/>
+                        <TextBlock Text="• System initialized successfully" 
+                                   FontSize="14" 
+                                   Margin="0,0,0,5"/>
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </StackPanel>
+    </Grid>
+</UserControl>

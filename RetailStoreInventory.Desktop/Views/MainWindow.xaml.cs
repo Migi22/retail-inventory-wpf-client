@@ -24,9 +24,6 @@ namespace RetailStoreInventory.Desktop.Views
         public MainWindow()
         {
             InitializeComponent();
-
-            //Bind the ViewModel to the View
-            DataContext = new MainWindowViewModel();
         }
     }
 }
