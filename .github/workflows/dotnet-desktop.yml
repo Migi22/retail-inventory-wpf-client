@@ -2,23 +2,26 @@ name: .NET WPF CI
 
 on:
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
 
 jobs:
   build:
     runs-on: windows-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v4
-      with:
-        dotnet-version: 8.0.x
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
 
-    - name: Restore dependencies
-      run: dotnet restore RetailStoreInventory.Desktop.sln
+      - name: Restore dependencies
+        run: dotnet restore RetailStoreInventory.Desktop.sln
 
-    - name: Build
-      run: dotnet build RetailStoreInventory.Desktop.sln --configuration Release --no-restore
+      - name: Checkout code formatting
+        run: dotnet format --verify-no-changes
+
+      - name: Build
+        run: dotnet build RetailStoreInventory.Desktop.sln --configuration Release --no-restore
