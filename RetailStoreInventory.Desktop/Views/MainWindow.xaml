@@ -146,15 +146,15 @@
             <!-- Main Navigation Menu -->
             <StackPanel Margin="10">
                 <!-- Dashboard navigation item -->
-                <RadioButton Content="Dashboard" 
+                <RadioButton Content="Dashboard"
+                             IsChecked="True" 
                              GroupName="MenuGroup"
                              Command="{Binding NavigateCommand}" 
                              CommandParameter="Dashboard" 
                              Style="{StaticResource NavRadioButtonStyle}"/>
                 
                 <!-- Products navigation item - default selected -->
-                <RadioButton Content="Products" 
-                             IsChecked="True" 
+                <RadioButton Content="Products"
                              GroupName="MenuGroup"
                              Command="{Binding NavigateCommand}" 
                              CommandParameter="Products" 

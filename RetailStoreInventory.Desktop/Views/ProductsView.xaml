@@ -42,34 +42,34 @@
         <!-- Products DataGrid - displays all products in a table format -->
         <DataGrid Grid.Row="1" 
                   ItemsSource="{Binding Products}"           
-                  AutoGenerateColumns="False"                
-                  Margin="10" 
-                  CanUserAddRows="False"                    
-                  CanUserDeleteRows="False"                 
-                  IsReadOnly="True">                        
-            
+                  AutoGenerateColumns="False"
+                  Margin="10"
+                  CanUserAddRows="False"               
+                  CanUserDeleteRows="False"               
+                  IsReadOnly="True">
+
             <!-- Define custom columns for the DataGrid -->
             <DataGrid.Columns>
                 <!-- Product ID column -->
                 <DataGridTextColumn Header="ID" 
-                                    Binding="{Binding Id}" 
-                                    Width="60"/>
-                
+                                        Binding="{Binding Id}" 
+                                        Width="60"/>
+
                 <!-- Product Name column - expands to fill available space -->
                 <DataGridTextColumn Header="Name" 
-                                    Binding="{Binding Name}" 
-                                    Width="*"/>
-                
+                                        Binding="{Binding Name}" 
+                                        Width="*"/>
+
                 <!-- Quantity column -->
                 <DataGridTextColumn Header="Quantity" 
-                                    Binding="{Binding Quantity}" 
-                                    Width="100"/>
-                
+                                        Binding="{Binding Quantity}" 
+                                        Width="100"/>
+
                 <!-- Price column -->
                 <DataGridTextColumn Header="Price" 
-                                    Binding="{Binding Price}" 
-                                    Width="100"/>
-                
+                                        Binding="{Binding Price}" 
+                                        Width="100"/>
+
                 <!-- Actions column with Edit/Delete buttons -->
                 <DataGridTemplateColumn Header="Actions" Width="120">
                     <DataGridTemplateColumn.CellTemplate>
@@ -78,20 +78,20 @@
                             <StackPanel Orientation="Horizontal">
                                 <!-- Edit button - bound to EditProductCommand -->
                                 <Button Content="Edit" 
-                                        Background="#2196F3" 
-                                        Foreground="White" 
-                                        Padding="5,2" 
-                                        Margin="0,0,5,0" 
-                                        Command="{Binding DataContext.EditProductCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" 
-                                        CommandParameter="{Binding}"/>
-                                
+                                            Background="#2196F3" 
+                                            Foreground="White" 
+                                            Padding="5,2" 
+                                            Margin="0,0,5,0" 
+                                            Command="{Binding DataContext.EditProductCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" 
+                                            CommandParameter="{Binding}"/>
+
                                 <!-- Delete button - bound to DeleteProductCommand -->
                                 <Button Content="Delete" 
-                                        Background="#F44336" 
-                                        Foreground="White" 
-                                        Padding="5,2"
-                                        Command="{Binding DataContext.DeleteProductCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" 
-                                        CommandParameter="{Binding}"/>
+                                            Background="#F44336" 
+                                            Foreground="White" 
+                                            Padding="5,2"
+                                            Command="{Binding DataContext.DeleteProductCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" 
+                                            CommandParameter="{Binding}"/>
                             </StackPanel>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>

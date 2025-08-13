@@ -19,7 +19,7 @@ namespace RetailStoreInventory.Desktop.ViewModels
         /// Backing field for the currently displayed view.
         /// This is what gets shown in the main content area of the window.
         /// </summary>
-        private UserControl _currentView;
+        private UserControl _currentView = null!;
         
         /// <summary>
         /// Gets or sets the currently displayed view.
@@ -53,7 +53,7 @@ namespace RetailStoreInventory.Desktop.ViewModels
             NavigateCommand = new RelayCommand(NavigateTo);
             
             // Set the default view to Products when the application starts
-            CurrentView = new Views.ProductsView();
+            CurrentView = new Views.DashboardView();
         }
 
         /// <summary>
