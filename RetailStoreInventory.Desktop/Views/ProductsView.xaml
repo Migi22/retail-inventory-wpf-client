@@ -41,12 +41,12 @@
 
         <!-- Products DataGrid - displays all products in a table format -->
         <DataGrid Grid.Row="1" 
-                  ItemsSource="{Binding Products}"           <!-- Bound to Products collection in ViewModel -->
-                  AutoGenerateColumns="False"                <!-- We define our own columns -->
+                  ItemsSource="{Binding Products}"           
+                  AutoGenerateColumns="False"                
                   Margin="10" 
-                  CanUserAddRows="False"                    <!-- Prevent direct editing in grid -->
-                  CanUserDeleteRows="False"                 <!-- Prevent direct deletion in grid -->
-                  IsReadOnly="True">                        <!-- Make grid read-only for safety -->
+                  CanUserAddRows="False"                    
+                  CanUserDeleteRows="False"                 
+                  IsReadOnly="True">                        
             
             <!-- Define custom columns for the DataGrid -->
             <DataGrid.Columns>
