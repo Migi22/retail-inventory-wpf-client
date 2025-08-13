@@ -1,0 +1,102 @@
+﻿<!-- 
+    ProductsView.xaml - UserControl for displaying and managing products inventory
+    
+    This view shows a DataGrid with all products and provides buttons for:
+    - Adding new products
+    - Editing existing products  
+    - Deleting products
+    
+    The DataContext is automatically set by the MainWindowViewModel when this view is displayed.
+    All bindings reference properties and commands from ProductsViewModel.
+-->
+
+<UserControl x:Class="RetailStoreInventory.Desktop.Views.ProductsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- Main layout container -->
+    <Grid>
+        <!-- Define two rows: header (auto-sized) and content (fills remaining space) -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>  <!-- Header row - only as tall as needed -->
+            <RowDefinition Height="*"/>     <!-- Content row - fills all remaining space -->
+        </Grid.RowDefinitions>
+
+        <!-- Header section with title and Add Product button -->
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="10" HorizontalAlignment="Left">
+            <!-- Page title -->
+            <TextBlock Text="Products Inventory" 
+                       FontSize="20" 
+                       FontWeight="Bold" 
+                       VerticalAlignment="Center" 
+                       Margin="0,0,20,0"/>
+            
+            <!-- Add Product button - bound to AddProductCommand in ProductsViewModel -->
+            <Button Content="Add Product" 
+                    Background="#4CAF50" 
+                    Foreground="White" 
+                    Padding="10,5" 
+                    Command="{Binding AddProductCommand}"/>
+        </StackPanel>
+
+        <!-- Products DataGrid - displays all products in a table format -->
+        <DataGrid Grid.Row="1" 
+                  ItemsSource="{Binding Products}"           <!-- Bound to Products collection in ViewModel -->
+                  AutoGenerateColumns="False"                <!-- We define our own columns -->
+                  Margin="10" 
+                  CanUserAddRows="False"                    <!-- Prevent direct editing in grid -->
+                  CanUserDeleteRows="False"                 <!-- Prevent direct deletion in grid -->
+                  IsReadOnly="True">                        <!-- Make grid read-only for safety -->
+            
+            <!-- Define custom columns for the DataGrid -->
+            <DataGrid.Columns>
+                <!-- Product ID column -->
+                <DataGridTextColumn Header="ID" 
+                                    Binding="{Binding Id}" 
+                                    Width="60"/>
+                
+                <!-- Product Name column - expands to fill available space -->
+                <DataGridTextColumn Header="Name" 
+                                    Binding="{Binding Name}" 
+                                    Width="*"/>
+                
+                <!-- Quantity column -->
+                <DataGridTextColumn Header="Quantity" 
+                                    Binding="{Binding Quantity}" 
+                                    Width="100"/>
+                
+                <!-- Price column -->
+                <DataGridTextColumn Header="Price" 
+                                    Binding="{Binding Price}" 
+                                    Width="100"/>
+                
+                <!-- Actions column with Edit/Delete buttons -->
+                <DataGridTemplateColumn Header="Actions" Width="120">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <!-- Horizontal stack of action buttons -->
+                            <StackPanel Orientation="Horizontal">
+                                <!-- Edit button - bound to EditProductCommand -->
+                                <Button Content="Edit" 
+                                        Background="#2196F3" 
+                                        Foreground="White" 
+                                        Padding="5,2" 
+                                        Margin="0,0,5,0" 
+                                        Command="{Binding DataContext.EditProductCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" 
+                                        CommandParameter="{Binding}"/>
+                                
+                                <!-- Delete button - bound to DeleteProductCommand -->
+                                <Button Content="Delete" 
+                                        Background="#F44336" 
+                                        Foreground="White" 
+                                        Padding="5,2"
+                                        Command="{Binding DataContext.DeleteProductCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" 
+                                        CommandParameter="{Binding}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>
