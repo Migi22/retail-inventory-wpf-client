@@ -1,24 +1,37 @@
-﻿<Window x:Class="RetailStoreInventory.Desktop.Views.MainWindow"
+﻿<!-- 
+    MainWindow.xaml - Main application window that serves as the shell/container
+    
+    This window provides:
+    - Left sidebar with navigation menu (Dashboard, Products, Reports)
+    - Top header with logo and app name
+    - Bottom section with Settings and Sign Out buttons
+    - Main content area that displays different views based on navigation
+    
+    The window uses MVVM pattern with MainWindowViewModel as its DataContext.
+    Navigation is handled through commands that switch the CurrentView property.
+-->
+
+<Window x:Class="RetailStoreInventory.Desktop.Views.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm="clr-namespace:RetailStoreInventory.Desktop.ViewModels"
         Title="Retail Store Inventory"
-        Height="600"
-        Width="850"
-        AllowsTransparency="False"
+        Height="450"
+        Width="800"
         WindowStartupLocation="CenterScreen"
         WindowStyle="SingleBorderWindow"
         Background="White">
-    
+
+    <!-- Set the DataContext to MainWindowViewModel for data binding -->
     <Window.DataContext>
         <vm:MainWindowViewModel/>
     </Window.DataContext>
-    
-    <!-- UI -->
+
+    <!-- Window resources for consistent styling -->
     <Window.Resources>
-        <!-- Style for bottom navigation-like buttons -->
+        <!-- Navigation Button Style - used for Settings and Sign Out buttons -->
         <Style x:Key="NavButtonStyle" TargetType="Button">
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="Background" Value="Transparent"/>
@@ -28,14 +41,10 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Border x:Name="bg" 
-                                Background="{TemplateBinding Background}" 
-                                CornerRadius="5"
-                                Padding="0,15">
+                        <Border x:Name="bg" Background="{TemplateBinding Background}" CornerRadius="5" Padding="0,15">
                             <ContentPresenter VerticalAlignment="Center" Margin="50,0,0,0"/>
                         </Border>
                         <ControlTemplate.Triggers>
-                            <!-- Hover -->
                             <Trigger Property="IsMouseOver" Value="True">
                                 <Setter TargetName="bg" Property="Background" Value="#5E936C"/>
                             </Trigger>
@@ -44,150 +53,126 @@
                 </Setter.Value>
             </Setter>
         </Style>
+
+        <!-- Navigation RadioButton Style - used for main navigation menu -->
+        <Style x:Key="NavRadioButtonStyle" TargetType="RadioButton">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="Margin" Value="0,3"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="RadioButton">
+                        <Grid>
+                            <Border x:Name="bg" Background="{TemplateBinding Background}" CornerRadius="5" Padding="14,20"/>
+                            <ContentPresenter VerticalAlignment="Center" Margin="50,0,0,0"/>
+                            <Ellipse x:Name="indicator" Width="8" Height="8" Fill="Green"
+                                 HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,5,0"
+                                 Visibility="Collapsed"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="bg" Property="Background" Value="#5E936C"/>
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="bg" Property="Background" Value="#5E936C"/>
+                                <Setter TargetName="indicator" Property="Visibility" Value="Visible"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Window.Resources>
+
+    <!-- Main UI Layout -->
     <Grid>
-        <!-- Base Grid -->
+        <!-- Define two columns: fixed-width sidebar and flexible content area -->
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="228"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="228"/>  <!-- Fixed-width sidebar -->
+            <ColumnDefinition Width="*"/>    <!-- Flexible content area -->
         </Grid.ColumnDefinitions>
 
-        <!-- Window Border -->
-        <Border Background="#3E5F44"
-                CornerRadius="20" />
+        <!-- Left Sidebar Panel -->
+        <DockPanel Grid.Column="0" Background="#3E5F44" LastChildFill="True">
 
-        <!-- Side Panel -->
-        <DockPanel Grid.Column="0"
-                   Background="#3E5F44"
-                   LastChildFill="True">
-
-            <!-- Top: Logo and System Name -->
-            <StackPanel DockPanel.Dock="Top"
-                        Orientation="Horizontal"
-                        VerticalAlignment="Center"
-                        HorizontalAlignment="Center"
-                        Margin="0,0,0,10">
-
-                <!-- Logo -->
-                <Image Source="/Assets/Images/logo_retail_system.png"
-                       Width="90"
-                       Height="90"
+            <!-- Top Section: Logo and App Name -->
+            <StackPanel DockPanel.Dock="Top" 
+                        Orientation="Horizontal" 
+                        Margin="0,0,0,10" 
+                        HorizontalAlignment="Center" 
+                        VerticalAlignment="Center">
+                <!-- App logo image -->
+                <Image Source="/Assets/Images/logo_retail_system.png" 
+                       Width="90" Height="90" 
                        Margin="0,0,10,0"/>
-
-                <!-- Text block group -->
-                <StackPanel Orientation="Vertical"
-                            VerticalAlignment="Center">
-
-                    <!-- Top Text -->
-                    <TextBlock Text="Tap Retail"
-                               Foreground="White"
-                               FontSize="15"
-                               FontWeight="Bold"
-                               VerticalAlignment="Center"/>
-
-                    <!-- Bottom Text-->
-                    <TextBlock Text="Retail Management System"
-                               Foreground="White"
-                               FontSize="10"
-                               FontWeight="Light"
-                               VerticalAlignment="Center"/>
+                
+                <!-- App name and description -->
+                <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+                    <TextBlock Text="Tap Retail" 
+                               Foreground="White" 
+                               FontSize="15" 
+                               FontWeight="Bold"/>
+                    <TextBlock Text="Retail Management System" 
+                               Foreground="White" 
+                               FontSize="10" 
+                               FontWeight="Light"/>
                 </StackPanel>
             </StackPanel>
 
-            <!-- Divider Line Top -->
-            <Separator DockPanel.Dock="Top"
-                       Margin="10,0"
-                       Background="White"
-                       Height="1"
-                       Opacity="0.5"/>
+            <!-- Top Divider -->
+            <Separator DockPanel.Dock="Top" Margin="10,0" Background="White" Height="1" Opacity="0.5"/>
 
-            <!-- Bottom: Settings and Sign Out buttons -->
-            <StackPanel DockPanel.Dock="Bottom"
-                        Margin="10">
-                <!-- Divider Line Bottom -->
-                <Separator DockPanel.Dock="Bottom"
-                           Margin="10,0"
-                           Background="White"
-                           Height="1"
+            <!-- Bottom Section: Settings and Sign Out -->
+            <StackPanel DockPanel.Dock="Bottom" Margin="10">
+                <!-- Bottom divider line -->
+                <Separator DockPanel.Dock="Bottom" 
+                           Margin="10,0" 
+                           Background="White" 
+                           Height="1" 
                            Opacity="0.5"/>
-                <Button Content="Settings"
+                
+                <!-- Settings button -->
+                <Button Content="Settings" 
                         Style="{StaticResource NavButtonStyle}"/>
-                <Button Content="Sign Out"
+                
+                <!-- Sign Out button -->
+                <Button Content="Sign Out" 
                         Style="{StaticResource NavButtonStyle}"/>
             </StackPanel>
 
-            <!-- Middle: Navigation buttons -->
+            <!-- Main Navigation Menu -->
             <StackPanel Margin="10">
-                <StackPanel.Resources>
-                    <!-- Style for navigation radio buttons -->
-                    <Style x:Key="NavRadioButtonStyle" TargetType="RadioButton">
-                        <Setter Property="Foreground" Value="White"/>
-                        <Setter Property="Background" Value="Transparent"/>
-                        <Setter Property="BorderThickness" Value="0"/>
-                        <Setter Property="Padding" Value="10"/>
-                        <Setter Property="HorizontalContentAlignment" Value="Left"/>
-                        <Setter Property="Margin" Value="0,3"/>
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="RadioButton">
-                                    <Grid>
-                                        <!-- Main Background -->
-                                        <Border x:Name="bg" 
-                                                Background="{TemplateBinding Background}" 
-                                                CornerRadius="5"
-                                                Padding="14,20"/>
-
-                                        <!-- Button text -->
-                                        <ContentPresenter VerticalAlignment="Center" Margin="50,0,0,0"/>
-
-                                        <!-- Green dot indicator -->
-                                        <Ellipse x:Name="indicator"
-                                                 Width="8" Height="8"
-                                                 Fill="Green"
-                                                 HorizontalAlignment="Right"
-                                                 VerticalAlignment="Center"
-                                                 Margin="0,0,5,0"
-                                                 Visibility="Collapsed"/>
-                                    </Grid>
-                                    <ControlTemplate.Triggers>
-                                        <!-- Hover -->
-                                        <Trigger Property="IsMouseOver" Value="True">
-                                            <Setter TargetName="bg" Property="Background" Value="#5E936C"/>
-                                        </Trigger>
-                                        <!-- Selected -->
-                                        <Trigger Property="IsChecked" Value="True">
-                                            <Setter TargetName="bg" Property="Background" Value="#5E936C"/>
-                                            <Setter TargetName="indicator" Property="Visibility" Value="Visible"/>
-                                        </Trigger>
-                                    </ControlTemplate.Triggers>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                    </Style>
-                </StackPanel.Resources>
-
-                <!-- Buttons -->
-                <RadioButton Content="Dashboard" IsChecked="True" GroupName="MenuGroup" Style="{StaticResource NavRadioButtonStyle}"/>
-                <RadioButton Content="Products" GroupName="MenuGroup" Style="{StaticResource NavRadioButtonStyle}"/>
-                <RadioButton Content="Reports" GroupName="MenuGroup" Style="{StaticResource NavRadioButtonStyle}"/>
+                <!-- Dashboard navigation item -->
+                <RadioButton Content="Dashboard" 
+                             GroupName="MenuGroup"
+                             Command="{Binding NavigateCommand}" 
+                             CommandParameter="Dashboard" 
+                             Style="{StaticResource NavRadioButtonStyle}"/>
+                
+                <!-- Products navigation item - default selected -->
+                <RadioButton Content="Products" 
+                             IsChecked="True" 
+                             GroupName="MenuGroup"
+                             Command="{Binding NavigateCommand}" 
+                             CommandParameter="Products" 
+                             Style="{StaticResource NavRadioButtonStyle}"/>
+                
+                <!-- Reports navigation item -->
+                <RadioButton Content="Reports" 
+                             GroupName="MenuGroup"
+                             Command="{Binding NavigateCommand}" 
+                             CommandParameter="Reports" 
+                             Style="{StaticResource NavRadioButtonStyle}"/>
             </StackPanel>
+
         </DockPanel>
 
-        <!-- Main Content Panel -->
-        <Grid Grid.Column="1" Background="White">
-            <DataGrid x:Name="ProductsDataGrid"
-                      IsReadOnly="True"
-                      AutoGenerateColumns="False"
-                      HeadersVisibility="Column"
-                      ItemsSource="{Binding Products}"
-                      Margin="182,28,34,167">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="*" />
-                    <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="2*" />
-                    <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity}" Width="*" />
-                    <DataGridTextColumn Header="Price" Binding="{Binding Price, StringFormat=₱{0:N2}}" Width="*" />
-                </DataGrid.Columns>
-            </DataGrid>
-        </Grid>
+        <!-- Right Content Panel: Displays the currently selected view -->
+        <ContentControl Grid.Column="1" 
+                        Content="{Binding CurrentView}" />
+
     </Grid>
 </Window>
