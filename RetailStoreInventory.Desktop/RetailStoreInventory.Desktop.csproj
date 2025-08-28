@@ -15,10 +15,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Services\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Resource Include="Assets\Images\logo_retail_system.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>

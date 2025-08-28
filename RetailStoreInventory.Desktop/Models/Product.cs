@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace RetailStoreInventory.Desktop.Models
+﻿namespace RetailStoreInventory.Desktop.Models
 {
     /// <summary>
     /// Represents a product in the retail store inventory system.
