@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using RetailStoreInventory.Desktop.Models;
+﻿using RetailStoreInventory.Desktop.Models;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using System.Windows;

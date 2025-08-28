@@ -1,7 +1,5 @@
 ﻿using RetailStoreInventory.Desktop.Services;
 using RetailStoreInventory.Desktop.Views;
-using System;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
@@ -29,12 +27,10 @@ namespace RetailStoreInventory.Desktop.ViewModels
             get => _password;
             set 
             { 
-                System.Diagnostics.Debug.WriteLine($"LoginViewModel.Password: Setting from '{_password}' to '{value}'");
                 _password = value; 
                 OnPropertyChanged();
                 // Trigger command re-evaluation when password changes
                 ((AsyncRelayCommand)LoginCommand).RaiseCanExecuteChanged();
-                System.Diagnostics.Debug.WriteLine($"LoginViewModel.Password: Command re-evaluation triggered");
             }
         }
 
@@ -50,7 +46,6 @@ namespace RetailStoreInventory.Desktop.ViewModels
         {
             // Allow login only if both fields are not empty
             bool canExecute = !string.IsNullOrWhiteSpace(Username) && !string.IsNullOrWhiteSpace(Password);
-            System.Diagnostics.Debug.WriteLine($"CanExecuteLogin: Username='{Username}', Password='{Password}', CanExecute={canExecute}");
             return canExecute;
         }
 

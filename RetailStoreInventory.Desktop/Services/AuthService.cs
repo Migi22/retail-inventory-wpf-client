@@ -35,10 +35,6 @@ namespace RetailStoreInventory.Desktop.Services
 
             Console.WriteLine($"Login attempt: {request.Username} / {request.Password}");
 
-            var enteredHash = BCrypt.Net.BCrypt.HashPassword(password);
-            System.Diagnostics.Debug.WriteLine($"Entered: {password}");
-            System.Diagnostics.Debug.WriteLine($"Entered Hash: {enteredHash}");
-
             var response = await _httpClient.PostAsJsonAsync("http://localhost:5082/api/auth/login", request);
 
             string raw = await response.Content.ReadAsStringAsync();
