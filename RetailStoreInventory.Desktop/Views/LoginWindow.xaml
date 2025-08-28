@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm="clr-namespace:RetailStoreInventory.Desktop.ViewModels"
         xmlns:local="clr-namespace:RetailStoreInventory.Desktop.Views"
+        xmlns:helpers="clr-namespace:RetailStoreInventory.Desktop.Helpers"
         Title="Login"
         Height="490"
         Width="800"
@@ -36,13 +37,13 @@
                                           Padding="{TemplateBinding Padding}"/>
                         </Border>
                         <ControlTemplate.Triggers>
-                            
+
                             <!-- Focused State -->
                             <Trigger Property="IsKeyboardFocused" Value="True">
                                 <Setter TargetName="border" Property="BorderBrush" Value="#5E936C"/>
                                 <Setter TargetName="border" Property="BorderThickness" Value="2"/>
                             </Trigger>
-                            
+
                             <!-- Disabled State -->
                             <Trigger Property="IsEnabled" Value="False">
                                 <Setter TargetName="border" Property="Background" Value="#EEE"/>
@@ -67,13 +68,13 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="PasswordBox">
                         <Border x:Name="border"
-                            CornerRadius="8"
-                            Background="{TemplateBinding Background}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}">
+                        CornerRadius="8"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}">
                             <ScrollViewer x:Name="PART_ContentHost"
-                                      Margin="0"
-                                      Padding="{TemplateBinding Padding}"/>
+                                  Margin="0"
+                                  Padding="{TemplateBinding Padding}"/>
                         </Border>
                         <ControlTemplate.Triggers>
                             <!-- Focused State -->
@@ -141,10 +142,8 @@
             <!-- Password -->
             <StackPanel Grid.Row="2" Orientation="Vertical" Margin="0,0,0,20">
                 <TextBlock Text="Password" FontWeight="SemiBold" Foreground="#5E936C" />
-                <PasswordBox Width="200" 
-                             x:Name="PasswordBox" 
-                             Height="35"
-                             Margin="0,5,0,0"/>
+                <PasswordBox Width="200"
+                             helpers:PasswordBoxHelper.BoundPassword="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
             </StackPanel>
 
             <!-- Login Button -->
@@ -156,8 +155,7 @@
                     FontSize="13"
                     FontWeight="Bold"
                     Foreground="White"
-                    Command="{Binding LoginCommand}"
-                    CommandParameter="{Binding ElementName=PasswordBox, Path=Password}">
+                    Command="{Binding LoginCommand}">
 
                 <!-- Rounded Style -->
                 <Button.Template>
