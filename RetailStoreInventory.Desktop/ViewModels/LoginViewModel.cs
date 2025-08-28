@@ -13,9 +13,9 @@ namespace RetailStoreInventory.Desktop.ViewModels
         public string Username
         {
             get => _username;
-            set 
-            { 
-                _username = value; 
+            set
+            {
+                _username = value;
                 OnPropertyChanged();
                 // Trigger command re-evaluation when username changes
                 ((AsyncRelayCommand)LoginCommand).RaiseCanExecuteChanged();
@@ -25,9 +25,9 @@ namespace RetailStoreInventory.Desktop.ViewModels
         public string Password
         {
             get => _password;
-            set 
-            { 
-                _password = value; 
+            set
+            {
+                _password = value;
                 OnPropertyChanged();
                 // Trigger command re-evaluation when password changes
                 ((AsyncRelayCommand)LoginCommand).RaiseCanExecuteChanged();
