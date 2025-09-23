@@ -140,7 +140,8 @@
                 
                 <!-- Sign Out button -->
                 <Button Content="Sign Out" 
-                        Style="{StaticResource NavButtonStyle}"/>
+                        Style="{StaticResource NavButtonStyle}"
+                        Command="{Binding SignOutCommand}"/>
             </StackPanel>
 
             <!-- Main Navigation Menu -->
