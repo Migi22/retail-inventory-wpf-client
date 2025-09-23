@@ -99,9 +99,9 @@ namespace RetailStoreInventory.Desktop.ViewModels
         private void ExecuteSignOut(object? parameter)
         {
             // Implement sign-out logic here
-            var result = MessageBox.Show("Are you sure you want to sign out?", 
-                                                        "Confirm Sign Out", 
-                                                        MessageBoxButton.YesNo, 
+            var result = MessageBox.Show("Are you sure you want to sign out?",
+                                                        "Confirm Sign Out",
+                                                        MessageBoxButton.YesNo,
                                                         MessageBoxImage.Question);
 
             if (result == MessageBoxResult.Yes)

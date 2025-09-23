@@ -7,8 +7,8 @@ namespace RetailStoreInventory.Desktop.ViewModels
 {
     public class LoginViewModel : BaseViewModel
     {
-        private string _username;
-        private string _password;
+        private string _username = string.Empty;
+        private string _password = string.Empty;
 
         public string Username
         {
@@ -42,14 +42,14 @@ namespace RetailStoreInventory.Desktop.ViewModels
             LoginCommand = new AsyncRelayCommand(ExecuteLogin, CanExecuteLogin);
         }
 
-        private bool CanExecuteLogin(object parameter)
+        private bool CanExecuteLogin(object? parameter)
         {
             // Allow login only if both fields are not empty
             bool canExecute = !string.IsNullOrWhiteSpace(Username) && !string.IsNullOrWhiteSpace(Password);
             return canExecute;
         }
 
-        private async Task ExecuteLogin(object parameter)
+        private async Task ExecuteLogin(object? parameter)
         {
             try
             {
